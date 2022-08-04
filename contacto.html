@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/reset.css">
+  <link rel="stylesheet" href="./styles/style.css">  
+  <script src="./js/validador.js"></script>
+<title>Final LPPA</title>
+</head>
+<body>
+<header>
+  <h1 class="titulo">2022 - UAI - Final LPPA - 4to</h1>
+  <div class="navbar">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#" id="cargarPartida">Cargar Partida</a></li>
+    <li><a href="#" id="guardarPartida">Guardar Partida</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+  </ul>
+</div>
+</header>
+
+<main>
+    <form id="formulario" class="formulario">
+        <fieldset class="fieldset">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" class="form" type="text"  name="fname">
+            <p class="red errorNombre" id="errorNombre"></p>
+        </fieldset>
+        <fieldset class="fieldset">
+            <label for="email">Email</label>
+            <input id="correo" class="form" type="text"  name="fmail">
+            <p class="red errorMail" id="errorMail"></p>
+        </fieldset>
+        <fieldset class="fieldset">
+            <label for="mensaje" class="mensaje">Mensaje</label>
+            <textarea id="mensaje" class="form textarea" type="text"  name="mensaje"></textarea>
+            <p class="red errorMensaje" id="errorMensaje"></p>
+        </fieldset class="fieldset">
+        <input id="submit"  class="enviar-form btn btn-primary" type="submit" value="Enviar">
+         <!-- MODAL -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Pronto nos pondremos en contacto.</p>
+            </div>
+            </div>
+        </div>
+    </form>
+  </main>
+  <footer>
+    <div class="footer">
+        <p>Link a repo GitHub <a href="https://github.com/resciagonzaloUAI/wordle" target="_blank">aquí</a></p>
+        <p>UAI - INGENIERIA EN SISTEMAS DE INFORMACION - 4TO - LPPA - RESCIA GONZALO</p>
+    </div>
+  </footer>
+  </body>
+  </html>
+  
