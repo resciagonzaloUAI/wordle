@@ -171,13 +171,11 @@ let colores = {
     }
   
     let savesArray = JSON.parse(localStorage.getItem('saves'));
-  
     let actualArray = savesArray[i].respuestas;
     let actualPalabra = savesArray[i].palabraGanadora;
     let actualTiempo = savesArray[i].tiempo
     let actualUsuario = savesArray[i].usuario;
     let actualTablaColores = savesArray[i].tablaColores;
-  
     colorTablero = actualTablaColores;
 
     pintaTabla();
@@ -266,7 +264,7 @@ let colores = {
 //Funcion para jugar con una partida cargada.
     for (let i = 0; i < 6; i++){
         let fieldset = document.getElementById(`fila${i}`);
-        fieldset.onkeydown = function (event){//el resto del juego guardarRespuesta con enter
+        fieldset.onkeydown = function (event){
             if(event.key === `Enter`){
                 let validaLetra = document.querySelectorAll(`#fila${i} input`);
                 let regex = new RegExp ("[A-Z]");
@@ -303,7 +301,7 @@ let colores = {
                     showBtn();
                     document.getElementById("mensaje-resultado").style.color = "rgb(0, 0, 0)";
                     document.getElementById("mensaje-resultado").innerHTML = "Te felicito! Ganaste la partida!";
-                    scorePartidaGanada(i); // Guardamos los datos de la partida con el score
+                    scorePartidaGanada(i); // Guardamos los datos de la partida con el puntaje
                     bloqueoFieldsetGanarOPerder();
                 }
   
@@ -335,7 +333,7 @@ let colores = {
                 if (i == 5  && respuestaUsuarioString != palabraGanadora){
                     gameOver = true;
                     showBtn();
-                    document.getElementById("mensaje-resultado").innerHTML = `Game OVER! No quedan mas intentos. La palabra es: "${palabraGanadora}"`;
+                    document.getElementById("mensaje-resultado").innerHTML = `Perdiste. No quedan mas intentos. La palabra era: "${palabraGanadora}"`;
                     bloqueoFieldsetGanarOPerder();
                     }
                 }
@@ -345,7 +343,7 @@ let colores = {
   }
   
   
-  //Funcion para asignar score, se ejecuta cuando el jugador gana
+  //Funcion para definir puntaje, se ejecuta cuando el jugador gana
   function scorePartidaGanada(fila){
   
     let puntaje = {};
@@ -355,29 +353,28 @@ let colores = {
   
     //calcular puntaje
     switch (fila) {
-  
         case 0:
-            puntaje.puntaje = 1500
-            break;
-  
-        case 1:
             puntaje.puntaje = 1000
             break;
   
-        case 2:
+        case 1:
             puntaje.puntaje = 800
             break;
   
-        case 3:
+        case 2:
             puntaje.puntaje = 600
             break;
   
-        case 4:
+        case 3:
             puntaje.puntaje = 400
             break;
   
-        case 5:
+        case 4:
             puntaje.puntaje = 200
+            break;
+  
+        case 5:
+            puntaje.puntaje = 50
             break;
   
         default:
@@ -396,13 +393,12 @@ let colores = {
   
   }
   
+  //Funcion para obtener puntajes. 
+  function ObtenerScore() { 
   
-  function ObtenerScore() { //Funcion para obtener puntajes. Ordena por fecha. la ejecuto en "Ranking"
-  
-    //Traigo del localStorage el array "puntajes", si no esta le asigno "[]"
+    //Traigo del LocalStorage "puntajes", si no esta se le asigna "[]"
     let puntajesArray = JSON.parse(localStorage.getItem("puntajes")) || [];
-  
-    //Muestro la lista de puntajes ordenado por fecha de mas nueva a mas antigua
+    //Muestra la lista de puntajes ordenado por fecha
     let body = "";
     for (let i = 0; i < puntajesArray.length; i++) {
             body += `<tr role="row">
@@ -416,10 +412,10 @@ let colores = {
   
   function ordenaTablaP() { //Funcion para ordenar puntajes
   
-    //Traigo del localStorage el array "puntajes", si no esta le asigno "[]"
+    //Traigo del LocalStorage "puntajes", si no esta se le asigna "[]"
     let puntajesArray = JSON.parse(localStorage.getItem('puntajes')) || [];
   
-    //ordeno el array de puntajes por puntaje de mayor a menor
+    //Orden puntajes
     puntajesArray.sort(function (a, b){
         if (a.puntaje > b.puntaje) {
             return 1;
@@ -427,11 +423,10 @@ let colores = {
         if (a.puntaje < b.puntaje) {
             return -1;
         }
-        // a must be equal to b
         return 0;
     });
   
-    //Ordeno el scoreboard por puntaje de mayor a menor
+    //Muestro la lista de puntajes ordenado por puntaje
     let body = '';
     for (let i = 0; i < puntajesArray.length; i++) {
             body += `<tr role="row">
@@ -454,6 +449,8 @@ let colores = {
     }
   }
   
+// FUNCIONES PARA CUANDO HAY ALGÚN ERROR EN LOS INPUTS
+
   function msjerrorEnter() {
     errorCampoVacio = document.getElementById("mensaje-error");
     errorCampoVacio.innerHTML = "Debe completar todos los cmapos de la fila";
@@ -477,7 +474,8 @@ let colores = {
     errorCampoValor.style.visibility = "hidden";
   }
   
-  
+// FUNCIÓN PRINCIPAL - INICIO DEL JUEGO
+
   function inicio () {
     for (let i = 0; i < 6; i++){
         let fieldset = document.getElementById(`fila${i}`);
@@ -496,13 +494,13 @@ let colores = {
                 let input2 = regex.test(valor2);
                 let input3 = regex.test(valor3);
                 let input4 = regex.test(valor4);
-  
+                //VALIDO Nombre
                 if (valor0 == "" || valor1 == "" || valor2 == "" || valor3 == "" || valor4 == ""){
                   msjerrorEnter();
-  
+                //VALIDO Valor
                 }else if (input0 == false || input1 == false || input2 == false || input3 == false || input4 == false){
                   msjerrorValor();
-  
+                  //VALIDO Letra
                 }else if (valor0.length > 1 || valor1.length  > 1 || valor2.length > 1 || valor3.length > 1 || valor4.length > 1 ){
                   msjerrorLetra();
                 }
@@ -560,7 +558,7 @@ let colores = {
     }
   }
   
-  
+// FUNCIÓN PARA GUARDAR RESPUESTA
   function guardaResp(i){
     for (let iCol = 0; iCol < 5; iCol++){
         let input = document.getElementById(`f${i}c${iCol}`).value;
@@ -584,20 +582,25 @@ let colores = {
     pintaTabla();
   }
   
-  
+  // CONSTANTE CON PALABRAS - NO SE PUDO HACER CON FETCH POR ERROR DE CORS
+
   const listaPalabras =     ["CABLE", "BOXEA", "JUEGA", "BAILA", "SALSA", "PAPAS", "JUEGA", "COFRE", "COMBO", "CALMA",
                              "CERCA", "CENAN", "CENAN", "FURIA", "FUROR", "ABRIL", "GANAR", "GARRA", "GATEE", "GOTEO",
                              "GMAIL", "GRITA", "GRITE", "GUITA", "PLATA", "HAZLO", "HECHO", "INFRA", "CABRA", "KARMA",
                              "LEONA", "MONJA", "MONOS", "MUJER", "OIGAN", "OZONO", "PALIO", "PELEA", "PALOS", "PANZA",
                              "PARAR", "PILAS", "PIPAS", "PLACA", "PUDOR", "FUMEN", "RAMOS", "RENAL", "TONGO", "ZANCO"]
   
+
+//BUSCA UNA PALABRA DE "listaPalabras" Y LA SELECCIONA AL AZAR
   function elegirPalabraAlAzar(listaPalabras) {
     return listaPalabras[Math.floor(Math.random() * listaPalabras.length)]
   }
-  
+
+//DEFINE LA PALABRA ENCONTRADA COMO GANADORA
   let palabraGanadora = elegirPalabraAlAzar(listaPalabras);
   let arrayPalabraGanadora = palabraGanadora.split("");
-  
+
+//FUNCIÓN PARA UTILIZAR LA TECLA TAB
   function tabular(e) {
     let obj = e.target
     let frm = obj.form;
@@ -616,7 +619,7 @@ let colores = {
   }
 
 
-  // Opción "Nueva partida"
+// OPCION "Nueva partida"
   function hideBtn() {
     document.getElementById("n-partida").style.display="none";
     document.getElementById("c-partida").style.display="none";
@@ -633,7 +636,7 @@ let colores = {
     document.getElementById("timer").style.display="none";
   }
 
-// SETEA E INICIA TIMER
+// SETEA E INICIA EL TIMER
   function timer() {
     let tresminutos = 60 * 5,
     display = document.querySelector("#time");
@@ -750,7 +753,9 @@ let colores = {
             ObtenerGuardadas();
         })
     })
-  
+
+//MODAL//
+
     function mostrarModal() {
         let modal = document.getElementById("modalPartidas");
         let span = document.getElementById("close");
