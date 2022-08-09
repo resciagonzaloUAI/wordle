@@ -7,58 +7,54 @@
   <link rel="stylesheet" href="./styles/reset.css">
   <link rel="stylesheet" href="./styles/style.css">  
   <script src="./js/validador.js"></script>
-<title>Final LPPA</title>
+<title>Final LPPA - Wordle</title>
 </head>
 <body>
 <header>
-  <h1 class="titulo">2022 - UAI - Final LPPA - 4to</h1>
-  <div class="navbar">
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="#" id="cargarPartida">Cargar Partida</a></li>
-    <li><a href="#" id="guardarPartida">Guardar Partida</a></li>
-    <li><a href="contacto.html">Contacto</a></li>
-  </ul>
+  <h1 class="titulo">2022 - UAI - FINAL - LPPA - 4to</h1>
+  <div id="buttons">
+    <button id="contactanos" class="button-nav"><a href="index.html">Home</a></button>
 </div>
-</header>
-
-<main>
-    <form id="formulario" class="formulario">
-        <fieldset class="fieldset">
-            <label for="nombre">Nombre</label>
-            <input id="nombre" class="form" type="text"  name="fname">
-            <p class="red errorNombre" id="errorNombre"></p>
-        </fieldset>
-        <fieldset class="fieldset">
-            <label for="email">Email</label>
-            <input id="correo" class="form" type="text"  name="fmail">
-            <p class="red errorMail" id="errorMail"></p>
-        </fieldset>
-        <fieldset class="fieldset">
-            <label for="mensaje" class="mensaje">Mensaje</label>
-            <textarea id="mensaje" class="form textarea" type="text"  name="mensaje"></textarea>
-            <p class="red errorMensaje" id="errorMensaje"></p>
-        </fieldset class="fieldset">
-        <input id="submit"  class="enviar-form btn btn-primary" type="submit" value="Enviar">
-         <!-- MODAL -->
-        <div id="myModal" class="modal">
-            <div class="modal-content">
-            <div class="modal-header">
-                <span class="close">&times;</span>
-            </div>
-            <div class="modal-body">
-                <p>Pronto nos pondremos en contacto.</p>
-            </div>
-            </div>
-        </div>
-    </form>
-  </main>
-  <footer>
-    <div class="footer">
-        <p>Link a repo GitHub <a href="https://github.com/resciagonzaloUAI/wordle" target="_blank">aquí</a></p>
-        <p>UAI - INGENIERIA EN SISTEMAS DE INFORMACION - 4TO - LPPA - RESCIA GONZALO</p>
+<form name="formulario" id="formulario-usuario">
+    <div id="nombre-jugador">
+        <label id="nombre-jugador-label" for="nombre">Primero, ingrese su nombre:</label>
+        <input type="text" name="nombre-jugador" id="nombre-jugador-input">
+        <p id="errorNombre"></p>
     </div>
-  </footer>
-  </body>
-  </html>
+</form>
+</header>
+<main>
+  <form id="form">
+      <fieldset class="fieldset-contacto">
+          <label for="nombre">Nombre</label>
+          <input id="nombre" class="formulario-clase" type="text" name="nombre" required>
+          <p class="red errorNombre" id="errorNombre"></p>
+          <p></p>
+      </fieldset>
+      <fieldset class="fieldset-contacto">
+          <label for="correo">Email</label>
+          <input id="correo" class="formulario-clase" type="email" name="correo" required>
+          <p class="red errorMail" id="errorMail"></p>
+          <p></p>
+      </fieldset>
+      <fieldset class="fieldset-contacto">
+          <label for="mensaje">Comentario</label>
+          <textarea id="mensaje" class="formulario-clase" name="mensaje" rows="5" cols="50" minlength="5" required></textarea>
+          <p class="red errorMensaje" id="errorMensaje"></p>
+          <p></p>
+      </fieldset>
+      <fieldset class="fieldset-contacto">
+          <input id="submit" class="enviar-form btn btn-primary" type="submit" value="Enviar">
+      </fieldset>
+  </form>
+</main>
+<footer>
+  <div class="footer">
+      <p>Link a repo GitHub <a href="https://github.com/resciagonzaloUAI/wordle" target="_blank">aquí</a></p>
+      <p>UAI - INGENIERIA EN SISTEMAS DE INFORMACION - 4TO - LPPA - RESCIA GONZALO</p>
+  </div>
+</footer>
+
+</body>
+</html>
   
